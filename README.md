@@ -57,9 +57,37 @@ For more information, see the [Google Documentation](https://cloud.google.com/vp
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/google-ip-prefix-diff-php.git
-2. Run the script in your PHP environment:
+2. Include the script in your Script:
    ```bash
-   php google_ip_prefix_diff.php
+   $ip_prefixes = include 'google_ip_prefix_diff.php';
+
+   foreach ($ip_prefixes as $cidr) {
+       echo $cidr . PHP_EOL;
+   }
+
+## Important Note: Avoid Direct Inclusion in Executed Scripts
+
+This script downloads large JSON files and processes the differences in IP ranges, which can be **time-consuming and resource-intensive**. For this reason:
+
+- **Do not include the script directly** in frequently executed scripts or APIs.
+- Implement a **local caching mechanism** to store the resulting CIDR ranges for repeated use.
+
+### Suggested Basic Caching Logic
+
+1. Run the script periodically (e.g., hourly) to generate the CIDR ranges:
+   ```bash
+   php google_ip_prefix_diff.php > google_ip_ranges.txt
+2. Load the cached results in your executed scripts:
+   ```bash
+   $ip_ranges = file('google_ip_ranges.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+   foreach ($ip_ranges as $cidr) {
+       echo $cidr . PHP_EOL;
+   }
+3. Automate the caching process using a cron job or similar scheduling tool:
+   ```bash
+   # Run the script daily at midnight to refresh the cache
+   0 0 * * * /usr/bin/php /path/to/google_ip_prefix_diff.php > /path/to/cached_ip_ranges.txt
 
 ## Reference
 This is a PHP implementation of the Python script provided by Google:
