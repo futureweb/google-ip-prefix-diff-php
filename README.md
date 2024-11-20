@@ -1,12 +1,17 @@
-# Google IP Prefix Difference (PHP)
+# Google IP Prefix Difference PHP
 
-This repository contains a PHP implementation of the Google-provided Python script for comparing Google Cloud IP ranges. It calculates the difference in IP ranges based on the `goog.json` and `cloud.json` files provided by Google.
+![License](https://img.shields.io/github/license/futureweb/google-ip-prefix-diff-php)
+![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)
+
+## Overview
+
+Google IP Prefix Difference PHP is a robust and efficient PHP script designed to retrieve and process Google's IP prefixes. It calculates the difference between two sets of IP ranges provided by Google, specifically those present in `goog.json` but not in `cloud.json`. 
 
 The script determines the IP ranges used by the default domains for Google APIs and services, such as `*.googleapis.com` and `*.gcr.io`. These IP ranges are calculated by subtracting the ranges in `cloud.json` (external IP ranges for Google Cloud customer resources) from those in `goog.json` (the complete list of Google IP ranges available on the internet).
 
 For more information, see the [Google Documentation](https://cloud.google.com/vpc/docs/configure-private-google-access#ip-addr-defaults).
 
----
+**Version 2** of the script introduces comprehensive support for both **IPv4 and IPv6** addresses, expanding its applicability and ensuring compatibility with modern network configurations.
 
 ## Features
 
@@ -15,7 +20,23 @@ For more information, see the [Google Documentation](https://cloud.google.com/vp
   - [`cloud.json`](https://www.gstatic.com/ipranges/cloud.json): External IP ranges for Google Cloud resources.
 - **Compares the IP ranges** in `goog.json` and `cloud.json`.
 - **Outputs the resulting CIDR ranges** used by Google APIs and services.
-- Fully implemented in PHP with **no external libraries required**.
+
+## Version 2 Highlights
+- **IPv4 and IPv6 Support:** Handles both IPv4 and IPv6 prefixes, allowing for comprehensive IP range processing.
+- **Efficient Range Processing:** Merges and sorts cloud IP ranges upfront to minimize redundancy and optimize subtraction operations.
+- **Optimized Bitwise Operations:** Enhancements for both GMP and BCMath extensions to ensure fast and efficient bitwise computations.
+- **Flexible Math Extensions:** Dynamically utilizes either the GMP or BCMath PHP extensions based on availability, preferring GMP for superior performance.
+- **Easy Integration:** Designed to be included in other PHP projects seamlessly, preventing direct access for enhanced security.
+- **Clear Documentation:** Comprehensive comments and documentation to facilitate easy understanding and maintenance.
+
+## Prerequisites
+
+- **PHP 7.4 or higher**
+- **PHP Extensions:**
+  - **GMP** (preferred for optimal performance) **OR**
+  - **BCMath**
+
+Ensure that at least one of these extensions is enabled in your PHP environment.
 
 ---
 
@@ -48,9 +69,18 @@ For more information, see the [Google Documentation](https://cloud.google.com/vp
    // Use the functions defined in the script
    $ip_prefixes = get_google_ip_prefixes_difference();
 
-   foreach ($ip_prefixes as $cidr) {
-       echo $cidr . PHP_EOL;
-   }
+   if ($ip_prefixes !== false) {
+        // Output IPv4 prefixes
+        foreach ($ip_prefixes['ipv4'] as $cidr) {
+            echo $cidr . PHP_EOL;
+        }
+        // Output IPv6 prefixes
+        foreach ($ip_prefixes['ipv6'] as $cidr) {
+            echo $cidr . PHP_EOL;
+        }
+    } else {
+        echo "Failed to retrieve IP prefixes." . PHP_EOL;
+    }
 
 ## Manual Installation
 
@@ -61,9 +91,18 @@ For more information, see the [Google Documentation](https://cloud.google.com/vp
    ```bash
    $ip_prefixes = include 'google_ip_prefix_diff.php';
 
-   foreach ($ip_prefixes as $cidr) {
-       echo $cidr . PHP_EOL;
-   }
+   if ($ip_prefixes !== false) {
+        // Output IPv4 prefixes
+        foreach ($ip_prefixes['ipv4'] as $cidr) {
+            echo $cidr . PHP_EOL;
+        }
+        // Output IPv6 prefixes
+        foreach ($ip_prefixes['ipv6'] as $cidr) {
+            echo $cidr . PHP_EOL;
+        }
+    } else {
+        echo "Failed to retrieve IP prefixes." . PHP_EOL;
+    }
 
 ## Important Note: Avoid Direct Inclusion in Executed Scripts
 
