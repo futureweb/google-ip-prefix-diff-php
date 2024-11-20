@@ -1,7 +1,7 @@
 {
     "name": "futureweb/google-ip-prefix-diff-php",
     "description": "PHP implementation of Google's Python script for calculating Google Cloud IP range differences.",
-    "keywords": ["google", "ip ranges", "google cloud", "CIDR", "json"],
+    "keywords": ["official google IPs", "google", "ip ranges", "google cloud", "CIDR", "json"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -15,9 +15,21 @@
     "require": {
         "php": ">=7.4"
     },
+    "suggest": {
+        "ext-gmp": "Required for using the GMP extension for better performance.",
+        "ext-bcmath": "Required for using the BCMath extension as a fallback."
+    },
     "autoload": {
         "files": [
             "google_ip_prefix_diff.php"
+        ]
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "php -r \"if (!extension_loaded('gmp') && !extension_loaded('bcmath')) { echo 'Error: Neither GMP nor BCMath extensions are enabled. Please enable one to proceed.\\n'; exit(1); }\""
+        ],
+        "pre-update-cmd": [
+            "php -r \"if (!extension_loaded('gmp') && !extension_loaded('bcmath')) { echo 'Error: Neither GMP nor BCMath extensions are enabled. Please enable one to proceed.\\n'; exit(1); }\""
         ]
     }
 }
