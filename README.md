@@ -35,7 +35,24 @@ For more information, see the [Google Documentation](https://cloud.google.com/vp
 
 ---
 
-## Usage
+## Installation via Composer
+
+1. Clone this repository:
+   ```bash
+   composer require futureweb/google-ip-prefix-diff-php
+2. Once installed, the script will be autoloaded by Composer, and you can use it in your project:
+   ```bash
+   <?php
+   require 'vendor/autoload.php';
+
+   // Use the functions defined in the script
+   $ip_prefixes = get_google_ip_prefixes_difference();
+
+   foreach ($ip_prefixes as $cidr) {
+       echo $cidr . PHP_EOL;
+   }
+
+## Manual Installation
 
 1. Clone this repository:
    ```bash
