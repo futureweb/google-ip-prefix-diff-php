@@ -222,12 +222,14 @@ function get_google_ip_prefixes_difference()
         return $difference_cidrs;
 
     } else {
-        return [];
+        return false;
     }
 }
 
+/*
 $ip_prefixes = get_google_ip_prefixes_difference();
 foreach ($ip_prefixes as $cidr) {
-    echo $cidr . "\n";
+    echo $cidr . PHP_EOL;
 }
+*/
 ?>
