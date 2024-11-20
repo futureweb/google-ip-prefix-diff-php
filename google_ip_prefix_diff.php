@@ -39,7 +39,7 @@
  * Note: If both GMP and BCMath are enabled, GMP will be preferred for performance.
  *
  * @author      Andreas Schnederle-Wagner, Futureweb GmbH
- * @version     2.0
+ * @version     2.0.0
  * @date        2024-11-20
  * @url         https://github.com/futureweb/google-ip-prefix-diff-php
  */
