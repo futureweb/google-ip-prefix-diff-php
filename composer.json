@@ -1,0 +1,23 @@
+{
+    "name": "futureweb/google-ip-prefix-diff-php",
+    "description": "PHP implementation of Google's Python script for calculating Google Cloud IP range differences.",
+    "keywords": ["google", "ip ranges", "google cloud", "CIDR", "json"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Schnederle-Wagner",
+            "email": "schnederle@futureweb.at",
+            "homepage": "https://futureweb.at",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "files": [
+            "google_ip_prefix_diff.php"
+        ]
+    }
+}
