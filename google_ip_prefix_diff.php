@@ -226,10 +226,13 @@ function get_google_ip_prefixes_difference()
     }
 }
 
-/*
-$ip_prefixes = get_google_ip_prefixes_difference();
-foreach ($ip_prefixes as $cidr) {
-    echo $cidr . PHP_EOL;
+// Check if the script is being run directly
+if (php_sapi_name() === 'cli') {
+    $ip_prefixes = get_google_ip_prefixes_difference();
+    
+    // Output each CIDR to the console
+    foreach ($ip_prefixes as $cidr) {
+        echo $cidr . PHP_EOL;
+    }
 }
-*/
 ?>
