@@ -3,7 +3,10 @@
 ![License](https://img.shields.io/github/license/futureweb/google-ip-prefix-diff-php)
 ![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)
 
-## Overview
+## Short Overview
+This script outputs **all IP ranges used by Google's own services**, excluding IP ranges assigned to Google Cloud customers. It is useful for identifying the IPs utilized exclusively by Google's infrastructure.
+
+## Detailed Overview
 
 Google IP Prefix Difference PHP is a robust and efficient PHP script designed to retrieve and process Google's IP prefixes. It calculates the difference between two sets of IP ranges provided by Google, specifically those present in `goog.json` but not in `cloud.json`. 
 
