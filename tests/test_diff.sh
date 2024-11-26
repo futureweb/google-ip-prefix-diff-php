@@ -69,14 +69,9 @@ fi
 echo "Running PHP script..."
 php "$PHP_SCRIPT_PATH" > php_output.txt
 
-# Sort both outputs
-echo "Sorting outputs..."
-sort python_output.txt > python_sorted.txt
-sort php_output.txt > php_sorted.txt
-
 # Compare the outputs
 echo "Comparing outputs..."
-if diff -u python_sorted.txt php_sorted.txt > diff_output.txt; then
+if diff -u python_output.txt php_output.txt > diff_output.txt; then
     echo "Test Passed: PHP and Python outputs match."
     exit 0
 else
