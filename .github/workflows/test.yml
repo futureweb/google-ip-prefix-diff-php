@@ -1,0 +1,45 @@
+name: PHP Script Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4' # Specify your PHP version
+        extensions: bcmath, gmp
+        coverage: none
+        tools: none
+
+    - name: Verify PHP Installation
+      run: |
+        php -v
+        php -m | grep -i -E 'bcmath|gmp'
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.6' # Specify your Python version
+
+    - name: Install Python Dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        # If your Python script requires additional packages, install them here
+        # Example:
+        # python3 -m pip install -r requirements.txt
+
+    - name: Run Test Script
+      run: |
+        chmod +x tests/test_diff.sh
+        ./tests/test_diff.sh
